@@ -12,7 +12,7 @@ class QRCreatePage extends StatefulWidget {
 class _QRCreatePageState extends State<QRCreatePage> {
   final controller = TextEditingController();
 
-  GlobalKey imageKey;
+  GlobalKey? imageKey;
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -20,7 +20,7 @@ class _QRCreatePageState extends State<QRCreatePage> {
         ),
         body: Center(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -29,12 +29,12 @@ class _QRCreatePageState extends State<QRCreatePage> {
                   return BarcodeWidget(
                     barcode: Barcode.qrCode(),
                     color: Colors.white,
-                    data: controller.text ?? 'Hello world',
+                    data: controller.text ,
                     width: 200,
                     height: 200,
                   );
                 }),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 ElevatedButton(
                     onPressed: () async {
                       Get.showSnackbar(const GetSnackBar(
@@ -57,13 +57,13 @@ class _QRCreatePageState extends State<QRCreatePage> {
                         forwardAnimationCurve: Curves.easeOutBack,
                       ));
 
-                      await DavinciCapture.click(imageKey,
+                      await DavinciCapture.click(imageKey!,
                           fileName: "QR code",
                           saveToDevice: true,
                           openFilePreview: true,
                           albumName: 'QR code');
                     },
-                    child: Text(
+                    child: const Text(
                       "Take Picture",
                     )),
                 Row(
@@ -72,7 +72,7 @@ class _QRCreatePageState extends State<QRCreatePage> {
                     const SizedBox(width: 12),
                     FloatingActionButton(
                       backgroundColor: Theme.of(context).primaryColor,
-                      child: Icon(Icons.done, size: 30),
+                      child: const Icon(Icons.done, size: 30),
                       onPressed: () => setState(() {}),
                     )
                   ],
@@ -85,17 +85,17 @@ class _QRCreatePageState extends State<QRCreatePage> {
 
   Widget buildTextField(BuildContext context) => TextField(
         controller: controller,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),
         decoration: InputDecoration(
           hintText: 'Enter the data',
-          hintStyle: TextStyle(color: Colors.grey),
+          hintStyle: const TextStyle(color: Colors.grey),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
