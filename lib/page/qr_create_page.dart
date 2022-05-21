@@ -2,7 +2,6 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:davinci/davinci.dart';
-import 'package:qr_code_scanner_example/main.dart';
 
 class QRCreatePage extends StatefulWidget {
   @override
@@ -18,7 +17,9 @@ class _QRCreatePageState extends State<QRCreatePage> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: Text(MyApp.title),
+          title: Text('Create QR Code', style: const TextStyle(
+                color: Colors.white,
+                 fontStyle: FontStyle.italic, fontWeight: FontWeight.bold)),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Color(0xff14C944),

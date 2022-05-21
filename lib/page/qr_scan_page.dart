@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import '../main.dart';
 
 class QRScanPage extends StatefulWidget {
   @override
@@ -18,7 +17,9 @@ class _QRScanPageState extends State<QRScanPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff14C944),
-        title: Text(MyApp.title),
+        title: Text('Scan QR Code', style: const TextStyle(
+                color: Colors.white,
+                 fontStyle: FontStyle.italic, fontWeight: FontWeight.bold)),
         elevation: 0.0,
         centerTitle: true,
       ),
