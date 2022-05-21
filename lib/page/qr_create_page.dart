@@ -14,9 +14,14 @@ class _QRCreatePageState extends State<QRCreatePage> {
 
   GlobalKey? imageKey;
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
         appBar: AppBar(
           title: Text(MyApp.title),
+          centerTitle: true,
+          elevation: 0.0,
+          backgroundColor: Color(0xff14C944),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -34,57 +39,75 @@ class _QRCreatePageState extends State<QRCreatePage> {
                     height: 200,
                   );
                 }),
-                const SizedBox(height: 40),
-                ElevatedButton(
-                    onPressed: () async {
-                      Get.showSnackbar(const GetSnackBar(
-                        titleText: Center(
-                            child: Text('Congratulation 🥳🎉',
-                                style: TextStyle(color: Colors.white))),
-                        messageText: Center(
-                          child: Text(
-                            "The QR code photo is in your gallerie",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        duration: Duration(seconds: 7),
-                        snackPosition: SnackPosition.TOP,
-                        margin: EdgeInsets.only(top: 100.0),
-                        backgroundColor: Colors.green,
-                        borderRadius: 20,
-                        isDismissible: true,
-                        dismissDirection: DismissDirection.horizontal,
-                        forwardAnimationCurve: Curves.easeOutBack,
-                      ));
+                SizedBox(height: size.height * 0.1),
+                buildTextField(context),
+                                SizedBox(height: size.height * 0.1),
 
-                      await DavinciCapture.click(imageKey!,
-                          fileName: "QR code",
-                          saveToDevice: true,
-                          openFilePreview: true,
-                          albumName: 'QR code');
-                    },
-                    child: const Text(
-                      "Take Picture",
-                    )),
-                Row(
-                  children: [
-                    Expanded(child: buildTextField(context)),
-                    const SizedBox(width: 12),
-                    FloatingActionButton(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      child: const Icon(Icons.done, size: 30),
-                      onPressed: () => setState(() {}),
-                    )
-                  ],
+                InkWell(
+                onTap: () async {
+                    Get.showSnackbar(const GetSnackBar(
+                      titleText: Center(
+                          child: Text('Congratulation 🥳🎉',
+                              style: TextStyle(color: Colors.white))),
+                      messageText: Center(
+                        child: Text(
+                          "The QR code photo is in your gallerie",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      duration: Duration(seconds: 7),
+                      snackPosition: SnackPosition.TOP,
+                      margin: EdgeInsets.only(top: 100.0),
+                      backgroundColor: Colors.green,
+                      borderRadius: 20,
+                      isDismissible: true,
+                      dismissDirection: DismissDirection.horizontal,
+                      forwardAnimationCurve: Curves.easeOutBack,
+                    ));
+                   
+                    await DavinciCapture.click(imageKey!,
+                        fileName: "code",
+                        saveToDevice: true,
+                        openFilePreview: true,
+                        albumName: 'QR code');
+                  },
+                child: Container(
+                  height: size.width * .12,
+                  width: size.width * .7,
+                  decoration: BoxDecoration(
+                    color: Color(0xff14C944),
+                    borderRadius: BorderRadius.circular(36),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Download QR code',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
+              ),
               ],
             ),
           ),
         ),
       );
+  }
 
   Widget buildTextField(BuildContext context) => TextField(
         controller: controller,
+        onChanged: (value) => setState(() {}),
         style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
@@ -92,7 +115,7 @@ class _QRCreatePageState extends State<QRCreatePage> {
         ),
         decoration: InputDecoration(
           hintText: 'Enter the data',
-          hintStyle: const TextStyle(color: Colors.grey),
+          hintStyle: const TextStyle(color: Colors.white),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: const BorderSide(color: Colors.white),

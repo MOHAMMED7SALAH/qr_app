@@ -3,35 +3,40 @@ import 'package:qr_code_scanner_example/page/qr_create_page.dart';
 import 'package:qr_code_scanner_example/page/qr_scan_page.dart';
 import 'package:qr_code_scanner_example/widget/button_widget.dart';
 
-class MainPage extends StatefulWidget {
+class Home extends StatefulWidget {
   final String title;
 
-  const MainPage({
+  const Home({
     required this.title,
   });
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _HomeState createState() => _HomeState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _HomeState extends State<Home> {
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Center(
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: Container(
+        height: size.height,
+        width: size.width,
+        // color: Colors.white,
+        child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: size.height * 0.3),
               ButtonWidget(
+                lottie: 'assets/myqr.json',
                 text: 'Create QR Code',
                 onClicked: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => QRCreatePage(),
                 )),
               ),
-              const SizedBox(height: 32),
+             SizedBox(height: size.height * 0.1),
               ButtonWidget(
+                lottie: 'assets/scan w.json',
                 text: 'Scan QR Code',
                 onClicked: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => QRScanPage(),
@@ -40,5 +45,7 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
         ),
-      );
+      ),
+    );
+  }
 }

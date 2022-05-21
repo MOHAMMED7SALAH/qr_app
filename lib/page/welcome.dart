@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:qr_code_scanner_example/page/main.dart';
+import 'package:qr_code_scanner_example/page/home.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _WelcomeState extends State<Welcome> {
   void initState() {
     Timer(const Duration(seconds: 2,   microseconds: 67), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const MainPage(
+          builder: (context) => const Home(
             title: 'QR Code',
           ))); 
     });
